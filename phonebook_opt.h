@@ -20,7 +20,7 @@ typedef struct __PHONE_BOOK_DETAIL {
 
 typedef struct __PHONE_BOOK_ENTRY {
     char lastName[MAX_LAST_NAME_SIZE];
-    detail *info;
+    detail *detailEntry;
     struct __PHONE_BOOK_ENTRY *pNext;
 } entry;
 

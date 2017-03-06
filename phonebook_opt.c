@@ -18,8 +18,6 @@ entry *findName(char lastName[], entry *pHead)
 
 entry *append(char lastName[], entry *e)
 {
-    // e->pNext = (entry *) malloc(sizeof(entry));
-    // e = e->pNext;
     e = (entry *) malloc(sizeof(entry));
     strcpy(e->lastName, lastName);
     e->pNext = NULL;
