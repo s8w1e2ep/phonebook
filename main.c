@@ -8,6 +8,8 @@
 
 #ifdef OPT
 #define OUT_FILE "opt.txt"
+#elif HASH
+#define OUT_FILE "hash.txt"
 #else
 #define OUT_FILE "orig.txt"
 #endif
@@ -48,6 +50,14 @@ int main(int argc, char *argv[])
     printf("size of entry : %lu bytes\n", sizeof(entry));
     e = pHead;
     e->pNext = NULL;
+
+#if defined(HASH)
+    int j = 0;
+    for(j = 0; j < MAX_HASH_TABLE_SIZE; j++) {
+        hashTable[j] = NULL;
+    }
+#endif
+
 
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
@@ -91,6 +101,13 @@ int main(int argc, char *argv[])
 
     printf("execution time of append() : %lf sec\n", cpu_time1);
     printf("execution time of findName() : %lf sec\n", cpu_time2);
+
+#if defined(HASH)
+    for(j = 0; j < MAX_HASH_TABLE_SIZE; j++) {
+        if(hashTable[j]) free(hashTable[j]->pNext);
+        free(hashTable[j]);
+    }
+#endif
 
     if (pHead->pNext) free(pHead->pNext);
     free(pHead);
