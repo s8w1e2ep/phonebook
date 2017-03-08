@@ -4,12 +4,11 @@
 #include <ctype.h>
 #include "phonebook_opt.h"
 
-/* FILL YOUR OWN IMPLEMENTATION HERE! */
 entry *findName(char lastName[], entry *pHead)
 {
-    /* TODO: implement */
-    while (pHead != NULL) {
-        if (strcasecmp(lastName, pHead->lastName) == 0)
+    /* Look up lastName whether in phonebook */
+    while (pHead) {
+        if (!strcasecmp(lastName, pHead->lastName))
             return pHead;
         pHead = pHead->pNext;
     }
@@ -18,6 +17,7 @@ entry *findName(char lastName[], entry *pHead)
 
 entry *append(char lastName[], entry *e)
 {
+    /* Append lastName to phonebook */
     e->pNext = (entry *) malloc(sizeof(entry));
     e = e->pNext;
     strcpy(e->lastName, lastName);
